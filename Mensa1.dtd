@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+    TODO define vocabulary identification
+    PUBLIC ID: -//vendor//vocabulary//EN
+    SYSTEM ID: http://server/path/Mensa1.dtd
+
+-->
+
+<!--
+    An example how to use this DTD from your XML document:
+
+    <?xml version="1.0"?>
+
+    <!DOCTYPE Form SYSTEM "Mensa1.dtd">
+
+    <Form>
+    ...
+    </Form>
+-->
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT Form (NonVisualComponents|Properties|SyntheticProperties|AuxValues|Layout|SubComponents)*>
+<!ATTLIST Form
+    version CDATA #IMPLIED
+    maxVersion CDATA #IMPLIED
+    type CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT NonVisualComponents (Component)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT Component (Properties|AuxValues|Events)*>
+<!ATTLIST Component
+    class CDATA #IMPLIED
+    name CDATA #IMPLIED
+    id CDATA #IMPLIED
+    alignment CDATA #IMPLIED
+    max CDATA #IMPLIED
+    attributes CDATA #IMPLIED
+    min CDATA #IMPLIED
+    pref CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT Properties (Property)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT Property (StringArray|Color|Font)*>
+<!ATTLIST Property
+    name CDATA #IMPLIED
+    type CDATA #IMPLIED
+    value CDATA #IMPLIED
+    editor CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT StringArray (StringItem)*>
+<!ATTLIST StringArray
+    count CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT StringItem EMPTY>
+<!ATTLIST StringItem
+    index CDATA #IMPLIED
+    value CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT AuxValues (AuxValue)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT AuxValue EMPTY>
+<!ATTLIST AuxValue
+    name CDATA #IMPLIED
+    type CDATA #IMPLIED
+    value CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT SyntheticProperties (SyntheticProperty)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT SyntheticProperty EMPTY>
+<!ATTLIST SyntheticProperty
+    name CDATA #IMPLIED
+    type CDATA #IMPLIED
+    value CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT Layout (DimensionLayout)*>
+<!ATTLIST Layout
+    class CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT DimensionLayout (Group)*>
+<!ATTLIST DimensionLayout
+    dim CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT Group (Component|Group|EmptySpace)*>
+<!ATTLIST Group
+    type CDATA #IMPLIED
+    groupAlignment CDATA #IMPLIED
+    attributes CDATA #IMPLIED
+    alignment CDATA #IMPLIED
+    max CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT SubComponents (Container|Component)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT Container (Properties|Layout|SubComponents|AuxValues)*>
+<!ATTLIST Container
+    class CDATA #IMPLIED
+    name CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT Color EMPTY>
+<!ATTLIST Color
+    blue CDATA #IMPLIED
+    green CDATA #IMPLIED
+    red CDATA #IMPLIED
+    type CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT EmptySpace EMPTY>
+<!ATTLIST EmptySpace
+    min CDATA #IMPLIED
+    pref CDATA #IMPLIED
+    max CDATA #IMPLIED
+    attributes CDATA #IMPLIED
+    type CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT Font EMPTY>
+<!ATTLIST Font
+    name CDATA #IMPLIED
+    size CDATA #IMPLIED
+    style CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT Events (EventHandler)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT EventHandler EMPTY>
+<!ATTLIST EventHandler
+    event CDATA #IMPLIED
+    listener CDATA #IMPLIED
+    parameters CDATA #IMPLIED
+    handler CDATA #IMPLIED
+  >
