@@ -4,17 +4,40 @@
  */
 package mensa;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  *
  * @author hp
  */
 public class CassaPrincipalee extends javax.swing.JFrame {
 
+    // Aggiungi questa variabile statica all'inizio della classe
+    public static boolean cassaAperta = true;
+
+    // Add static field for fondo cassa
+    public static double fondoCassa = 0.0;
+
+    private static CassaPrincipalee instance;
+    private static Mensa1 mensa1Instance;
+
+    private static final String PASSWORD = "Berlino2025"; 
+
     /**
      * Creates new form CassaPrincipalee
      */
     public CassaPrincipalee() {
         initComponents();
+        jTextField1.setText("0.00"); // Set initial display value
+        instance = this;
+    }
+
+    public static CassaPrincipalee getInstance() {
+        if (instance == null) {
+            instance = new CassaPrincipalee();
+        }
+        return instance;
     }
 
     /**
@@ -35,6 +58,7 @@ public class CassaPrincipalee extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
 
@@ -53,12 +77,44 @@ public class CassaPrincipalee extends javax.swing.JFrame {
         jLabel1.setText("Cassa Principale");
 
         jButton1.setText("DEPOSITA");
+        jButton1.setEnabled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    double importo = Double.parseDouble(jTextField3.getText());
+                    updateFondoCassa(importo);
+                    jTextField3.setText("");
+                    JOptionPane.showMessageDialog(null, "Deposito effettuato con successo");
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Inserire un importo valido", "Errore", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
 
         jButton2.setText("PRELEVA");
+        jButton2.setEnabled(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    double importo = Double.parseDouble(jTextField3.getText());
+                    if (importo > fondoCassa) {
+                        JOptionPane.showMessageDialog(null, "Fondi insufficienti", "Errore", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    updateFondoCassa(-importo);
+                    jTextField3.setText("");
+                    JOptionPane.showMessageDialog(null, "Prelievo effettuato con successo");
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Inserire un importo valido", "Errore", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("FONDO CASSA:");
 
+        jTextField1.setText("0.00");
+        jTextField1.setEditable(false);
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -66,8 +122,51 @@ public class CassaPrincipalee extends javax.swing.JFrame {
         });
 
         jButton3.setText("APRI CASSA");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JPasswordField pf = new JPasswordField();
+                int result = JOptionPane.showConfirmDialog(null, pf, "Inserisci password:",
+                        JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+                
+                if (result == JOptionPane.OK_OPTION) {
+                    String password = new String(pf.getPassword());
+                    if (password.equals(PASSWORD)) {
+                        cassaAperta = true;
+                        jButton1.setEnabled(true);
+                        jButton2.setEnabled(true);
+                        JOptionPane.showMessageDialog(null, "Cassa Aperta");
+                        setVisible(false);
+                        if (mensa1Instance == null) {
+                            mensa1Instance = new Mensa1();
+                        }
+                        mensa1Instance.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Password errata!", "Errore", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
 
         jButton4.setText("CHIUDI CASSA");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cassaAperta = false;
+                jButton1.setEnabled(false);  // Disabilita il pulsante DEPOSITA
+                jButton2.setEnabled(false);  // Disabilita il pulsante PRELEVA
+                JOptionPane.showMessageDialog(null, "Cassa Chiusa");
+            }
+        });
+
+        jButton5.setText("VAI AL MENU");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setVisible(false);
+                if (mensa1Instance == null) {
+                    mensa1Instance = new Mensa1();
+                }
+                mensa1Instance.setVisible(true);
+            }
+        });
 
         jLabel3.setText("IMPORTO ");
 
@@ -81,6 +180,8 @@ public class CassaPrincipalee extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 249, Short.MAX_VALUE)
                         .addComponent(jButton4)
+                        .addGap(42, 42, 42)
+                        .addComponent(jButton5)
                         .addGap(42, 42, 42)
                         .addComponent(jButton3))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -110,6 +211,7 @@ public class CassaPrincipalee extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4)
+                    .addComponent(jButton5)
                     .addComponent(jButton3))
                 .addGap(72, 72, 72)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -125,6 +227,9 @@ public class CassaPrincipalee extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(21, 21, 21))
         );
+
+        setLocationRelativeTo(null); // Center the window
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Close only this window, not entire app
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -147,6 +252,19 @@ public class CassaPrincipalee extends javax.swing.JFrame {
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
+
+    // Add method to update fondo cassa display
+    public static void updateFondoCassa(double amount) {
+        fondoCassa += amount;
+        java.awt.EventQueue.invokeLater(() -> {
+            // Update all instances of CassaPrincipalee
+            for (Window window : Window.getWindows()) {
+                if (window instanceof CassaPrincipalee) {
+                    ((CassaPrincipalee) window).jTextField1.setText(String.format("%.2f", fondoCassa));
+                }
+            }
+        });
+    }
 
     /**
      * @param args the command line arguments
@@ -188,6 +306,7 @@ public class CassaPrincipalee extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

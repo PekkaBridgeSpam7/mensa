@@ -23,32 +23,12 @@ public class Menu extends javax.swing.JFrame {
     private ButtonGroup dessertGroup = new ButtonGroup();
     private ButtonGroup bevandeGroup = new ButtonGroup();
 
-    
-     // Creates new form Menu
-     
+    private javax.swing.JButton jButton2; // Add new button for CassaPrincipalee
+
+    // Creates new form Menu
     public Menu() {
         initComponents();
-        
-        // Raggruppa i radio button
-        primiGroup.add(jRadioButton1);
-        primiGroup.add(jRadioButton2);
-        primiGroup.add(jRadioButton3);
-        
-        secondiGroup.add(jRadioButton4);
-        secondiGroup.add(jRadioButton5);  // Corretto da jRadioButton15
-        secondiGroup.add(jRadioButton6);
-        
-        contorniGroup.add(jRadioButton7);
-        contorniGroup.add(jRadioButton8);
-        contorniGroup.add(jRadioButton9);
-        
-        dessertGroup.add(jRadioButton13);
-        dessertGroup.add(jRadioButton14);
-        dessertGroup.add(jRadioButton15);
-        
-        bevandeGroup.add(jRadioButton16);
-        bevandeGroup.add(jRadioButton17);
-        bevandeGroup.add(jRadioButton18);
+        setupButtonGroups();
         
         // Crea un pannello semplice per il titolo
         JPanel titlePanel = new JPanel();
@@ -61,6 +41,33 @@ public class Menu extends javax.swing.JFrame {
         setLayout(new BorderLayout());
         add(titlePanel, BorderLayout.NORTH);
         add(new JScrollPane(jPanel1), BorderLayout.CENTER);
+    }
+
+    private void setupButtonGroups() {
+        // Primi piatti
+        primiGroup.add(jRadioButton1);
+        primiGroup.add(jRadioButton2);
+        primiGroup.add(jRadioButton3);
+        
+        // Secondi piatti
+        secondiGroup.add(jRadioButton4);
+        secondiGroup.add(jRadioButton5);
+        secondiGroup.add(jRadioButton6);
+        
+        // Contorni
+        contorniGroup.add(jRadioButton7);
+        contorniGroup.add(jRadioButton8);
+        contorniGroup.add(jRadioButton9);
+        
+        // Dessert
+        dessertGroup.add(jRadioButton13);
+        dessertGroup.add(jRadioButton14);
+        dessertGroup.add(jRadioButton15);
+        
+        // Bevande
+        bevandeGroup.add(jRadioButton16);
+        bevandeGroup.add(jRadioButton17);
+        bevandeGroup.add(jRadioButton18);
     }
 
     /**
@@ -83,6 +90,7 @@ public class Menu extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton(); // Add new button for CassaPrincipalee
         jLabel10 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
@@ -133,6 +141,13 @@ public class Menu extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Apri Cassa");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -251,7 +266,8 @@ public class Menu extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(jRadioButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jRadioButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jRadioButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2)) // Add the button to the layout
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -305,7 +321,9 @@ public class Menu extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jRadioButton17)
                         .addGap(18, 18, 18)
-                        .addComponent(jRadioButton18))
+                        .addComponent(jRadioButton18)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)) // Add the button to the layout
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 22, Short.MAX_VALUE))
         );
@@ -325,6 +343,10 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        calculateTotal();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void calculateTotal() {
         double totale = 0;
         StringBuilder receipt = new StringBuilder();
         receipt.append("Mensa da Salvatore\n");
@@ -332,78 +354,38 @@ public class Menu extends javax.swing.JFrame {
         receipt.append("ORDINE:\n");
         
         // Primi piatti
-        if(jRadioButton1.isSelected()) {
-            totale += 8.50;
-            receipt.append("Pasta al sugo\t\t€ 8.50\n");
-        }
-        if(jRadioButton2.isSelected()) {
-            totale += 9.00;
-            receipt.append("Pasta e pesto\t\t€ 9.00\n");
-        }
-        if(jRadioButton3.isSelected()) {
-            totale += 9.50;
-            receipt.append("Pasta e patate\t\t€ 9.50\n");
-        }
+        if(jRadioButton1.isSelected()) { totale += 8.50; receipt.append("Pasta al sugo\t\t€ 8.50\n"); }
+        if(jRadioButton2.isSelected()) { totale += 9.00; receipt.append("Pasta e pesto\t\t€ 9.00\n"); }
+        if(jRadioButton3.isSelected()) { totale += 9.50; receipt.append("Pasta e patate\t\t€ 9.50\n"); }
         
         // Secondi piatti
-        if(jRadioButton4.isSelected()) {
-            totale += 12.00;
-            receipt.append("Cotoletta\t\t€ 12.00\n");
-        }
-        if(jRadioButton5.isSelected()) {
-            totale += 11.00;
-            receipt.append("Salsiccia\t\t€ 11.00\n");
-        }
-        if(jRadioButton6.isSelected()) {
-            totale += 13.00;
-            receipt.append("Bastoncini di pesce\t€ 13.00\n");
-        }
+        if(jRadioButton4.isSelected()) { totale += 12.00; receipt.append("Cotoletta\t\t€ 12.00\n"); }
+        if(jRadioButton5.isSelected()) { totale += 11.00; receipt.append("Salsiccia\t\t€ 11.00\n"); }
+        if(jRadioButton6.isSelected()) { totale += 13.00; receipt.append("Bastoncini di pesce\t€ 13.00\n"); }
         
         // Contorni
-        if(jRadioButton7.isSelected()) {
-            totale += 4.50;
-            receipt.append("Patatine\t\t€ 4.50\n");
-        }
-        if(jRadioButton8.isSelected()) {
-            totale += 4.00;
-            receipt.append("Insalata\t\t€ 4.00\n");
-        }
-        if(jRadioButton9.isSelected()) {
-            totale += 4.50;
-            receipt.append("Broccoli\t\t€ 4.50\n");
-        }
+        if(jRadioButton7.isSelected()) { totale += 4.50; receipt.append("Patatine\t\t€ 4.50\n"); }
+        if(jRadioButton8.isSelected()) { totale += 4.00; receipt.append("Insalata\t\t€ 4.00\n"); }
+        if(jRadioButton9.isSelected()) { totale += 4.50; receipt.append("Broccoli\t\t€ 4.50\n"); }
         
         // Dessert
-        if(jRadioButton13.isSelected()) {
-            totale += 1.50;
-            receipt.append("Banana\t\t€ 1.50\n");
-        }
-        if(jRadioButton14.isSelected()) {
-            totale += 5.00;
-            receipt.append("Tortino al cioccolato\t€ 5.00\n");
-        }
-        if(jRadioButton15.isSelected()) {
-            totale += 4.00;
-            receipt.append("Gelato alla fragola\t€ 4.00\n");
-        }
+        if(jRadioButton13.isSelected()) { totale += 1.50; receipt.append("Banana\t\t€ 1.50\n"); }
+        if(jRadioButton14.isSelected()) { totale += 5.00; receipt.append("Tortino al cioccolato\t€ 5.00\n"); }
+        if(jRadioButton15.isSelected()) { totale += 4.00; receipt.append("Gelato alla fragola\t€ 4.00\n"); }
         
         // Bevande
-        if(jRadioButton16.isSelected()) {
-            totale += 1.00;
-            receipt.append("Acqua\t\t€ 1.00\n");
-        }
-        if(jRadioButton17.isSelected()) {
-            totale += 3.50;
-            receipt.append("Birra\t\t€ 3.50\n");
-        }
-        if(jRadioButton18.isSelected()) {
-            totale += 4.00;
-            receipt.append("Vino\t\t€ 4.00\n");
-        }
+        if(jRadioButton16.isSelected()) { totale += 1.00; receipt.append("Acqua\t\t€ 1.00\n"); }
+        if(jRadioButton17.isSelected()) { totale += 3.50; receipt.append("Birra\t\t€ 3.50\n"); }
+        if(jRadioButton18.isSelected()) { totale += 4.00; receipt.append("Vino\t\t€ 4.00\n"); }
         
         receipt.append("\nTotale da pagare: € ").append(String.format("%.2f", totale));
         jTextArea1.setText(receipt.toString());
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
+        CassaPrincipalee cassa = new CassaPrincipalee();
+        cassa.setVisible(true);
+    }
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
@@ -446,6 +428,7 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2; // Add new button for CassaPrincipalee
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
