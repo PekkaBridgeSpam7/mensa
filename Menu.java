@@ -23,7 +23,6 @@ public class Menu extends javax.swing.JFrame {
     private ButtonGroup dessertGroup = new ButtonGroup();
     private ButtonGroup bevandeGroup = new ButtonGroup();
 
-    private javax.swing.JButton jButton2; // Add new button for CassaPrincipalee
 
     // Creates new form Menu
     public Menu() {
