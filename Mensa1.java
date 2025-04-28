@@ -236,7 +236,7 @@ public class Mensa1 extends javax.swing.JFrame {
         if (jRadioButton1.isSelected()) {
             int qty = getQuantity(spinners[0]);
             if (qty > 0) {
-                double price = 8.50 * qty;
+                double price = 5.50 * qty;
                 totale += price;
                 addItem.accept(String.format("Pasta al sugo (x%d)", qty), price);
             }
@@ -244,7 +244,7 @@ public class Mensa1 extends javax.swing.JFrame {
         if (jRadioButton2.isSelected()) {
             int qty = getQuantity(spinners[1]);
             if (qty > 0) {
-                double price = 9.00 * qty;
+                double price = 5.50 * qty;
                 totale += price;
                 addItem.accept(String.format("Pasta e pesto (x%d)", qty), price);
             }
@@ -252,7 +252,7 @@ public class Mensa1 extends javax.swing.JFrame {
         if (jRadioButton3.isSelected()) {
             int qty = getQuantity(spinners[2]);
             if (qty > 0) {
-                double price = 9.50 * qty;
+                double price = 5.50 * qty;
                 totale += price;
                 addItem.accept(String.format("Pasta e patate (x%d)", qty), price);
             }
@@ -262,7 +262,7 @@ public class Mensa1 extends javax.swing.JFrame {
         if (jRadioButton4.isSelected()) {
             int qty = getQuantity(spinners[3]);
             if (qty > 0) {
-                double price = 12.00 * qty;
+                double price = 7.00 * qty;
                 totale += price;
                 addItem.accept(String.format("Cotoletta (x%d)", qty), price);
             }
@@ -270,7 +270,7 @@ public class Mensa1 extends javax.swing.JFrame {
         if (jRadioButton5.isSelected()) {
             int qty = getQuantity(spinners[4]);
             if (qty > 0) {
-                double price = 11.00 * qty;
+                double price = 7.00 * qty;
                 totale += price;
                 addItem.accept(String.format("Salsiccia (x%d)", qty), price);
             }
@@ -278,7 +278,7 @@ public class Mensa1 extends javax.swing.JFrame {
         if (jRadioButton6.isSelected()) {
             int qty = getQuantity(spinners[5]);
             if (qty > 0) {
-                double price = 13.00 * qty;
+                double price = 7.00 * qty;
                 totale += price;
                 addItem.accept(String.format("Bastoncini di pesce (x%d)", qty), price);
             }
@@ -288,7 +288,7 @@ public class Mensa1 extends javax.swing.JFrame {
         if (jRadioButton7.isSelected()) {
             int qty = getQuantity(spinners[6]);
             if (qty > 0) {
-                double price = 4.50 * qty;
+                double price = 2.50 * qty;
                 totale += price;
                 addItem.accept(String.format("Patatine (x%d)", qty), price);
             }
@@ -296,7 +296,7 @@ public class Mensa1 extends javax.swing.JFrame {
         if (jRadioButton8.isSelected()) {
             int qty = getQuantity(spinners[7]);
             if (qty > 0) {
-                double price = 4.00 * qty;
+                double price = 2.50 * qty;
                 totale += price;
                 addItem.accept(String.format("Insalata (x%d)", qty), price);
             }
@@ -304,7 +304,7 @@ public class Mensa1 extends javax.swing.JFrame {
         if (jRadioButton9.isSelected()) {
             int qty = getQuantity(spinners[8]);
             if (qty > 0) {
-                double price = 4.50 * qty;
+                double price = 2.50 * qty;
                 totale += price;
                 addItem.accept(String.format("Broccoli (x%d)", qty), price);
             }
@@ -330,7 +330,7 @@ public class Mensa1 extends javax.swing.JFrame {
         if (jRadioButton15.isSelected()) {
             int qty = getQuantity(spinners[11]);
             if (qty > 0) {
-                double price = 4.00 * qty;
+                double price = 2.50 * qty;
                 totale += price;
                 addItem.accept(String.format("Gelato alla fragola (x%d)", qty), price);
             }
@@ -348,7 +348,7 @@ public class Mensa1 extends javax.swing.JFrame {
         if (jRadioButton17.isSelected()) {
             int qty = getQuantity(spinners[13]);
             if (qty > 0) {
-                double price = 3.50 * qty;
+                double price = 3.00 * qty;
                 totale += price;
                 addItem.accept(String.format("Birra (x%d)", qty), price);
             }
@@ -470,24 +470,43 @@ public class Mensa1 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jRadioButton1.setText("Pasta al sugo (€8.50)");
-        jRadioButton2.setText("Pata e pesto (€9.00)");
-        jRadioButton3.setText("Pasta e patate (€9.50)");
-        jRadioButton4.setText("Cotoletta (€12.00)");
-        jRadioButton5.setText("Salsiccia (€11.00)");
-        jRadioButton6.setText("Bastoncini di pesce (€13.00)");
-        jRadioButton7.setText("Patatine (€4.50)");
-        jRadioButton8.setText("Insalata (€4.00)");
-        jRadioButton9.setText("Broccoli (€4.50)");
+        jRadioButton1.setText("Pasta al sugo (€5.50)");
+        jRadioButton2.setText("Pata e pesto (€5.50)");
+        jRadioButton3.setText("Pasta e patate (€5.50)");
+        jRadioButton4.setText("Cotoletta (€7.00)");
+        jRadioButton5.setText("Salsiccia (€7.00)");
+        jRadioButton6.setText("Bastoncini di pesce (€7.00)");
+        jRadioButton7.setText("Patatine (€2.50)");
+        jRadioButton8.setText("Insalata (€2.50)");
+        jRadioButton9.setText("Broccoli (€2.50)");
         jRadioButton13.setText("Banana (€1.50)");
         jRadioButton14.setText("Tortino al cioccolato (€5.00)");
-        jRadioButton15.setText("Gelato alla fragola (€4.00)");
+        jRadioButton15.setText("Gelato alla fragola (€2.50)");
         jRadioButton16.setText("Acqua (€1.00)");
-        jRadioButton17.setText("Birra (€3.50)");
+        jRadioButton17.setText("Birra (€3.00)");
         jRadioButton18.setText("Vino (€4.00)");
 
+        // Set consistent font and padding for all radio buttons
+        JRadioButton[] allRadioButtons = {
+            jRadioButton1, jRadioButton2, jRadioButton3,
+            jRadioButton4, jRadioButton5, jRadioButton6,
+            jRadioButton7, jRadioButton8, jRadioButton9,
+            jRadioButton13, jRadioButton14, jRadioButton15,
+            jRadioButton16, jRadioButton17, jRadioButton18
+        };
+        
+        Font radioButtonFont = new Font("Arial", Font.PLAIN, 14);
+        int maxWidth = 250; // Fixed width for all radio buttons
+        
+        for (JRadioButton rb : allRadioButtons) {
+            rb.setFont(radioButtonFont);
+            rb.setPreferredSize(new Dimension(maxWidth, rb.getPreferredSize().height));
+            rb.setMinimumSize(new Dimension(maxWidth, rb.getPreferredSize().height));
+        }
+
         jLabel2.setFont(new java.awt.Font("Rockwell", Font.BOLD | Font.ITALIC, 36));
-        jLabel2.setText("Mensa da Salvatore");
+jLabel2.setText("Mensa da Salvatore");
+jLabel2.setText("Mensa da Salvatore");
 
         jLabel11.setFont(new java.awt.Font("Arial Black", Font.BOLD, 18));
         jLabel11.setText("Primi Piatti");
@@ -552,67 +571,67 @@ public class Mensa1 extends javax.swing.JFrame {
                     .addComponent(jLabel11)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton1)
-                        .addGap(300, 300, 300)  
+                        .addGap(30, 30, 30)   
                         .addComponent(spinners[0]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton2)
-                        .addGap(300, 300, 300)  
+                        .addGap(30, 30, 30)   
                         .addComponent(spinners[1]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton3)
-                        .addGap(300, 300, 300) 
+                        .addGap(30, 30, 30)  
                         .addComponent(spinners[2]))
                     .addComponent(jLabel12)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton4)
-                        .addGap(300, 300, 300)  
+                        .addGap(30, 30, 30)   
                         .addComponent(spinners[3]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton5)
-                        .addGap(300, 300, 300)  
+                        .addGap(30, 30, 30)   
                         .addComponent(spinners[4]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton6)
-                        .addGap(300, 300, 300)  
+                        .addGap(30, 30, 30)   
                         .addComponent(spinners[5]))
                     .addComponent(jLabel13)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton7)
-                        .addGap(300, 300, 300)  
+                        .addGap(30, 30, 30)   
                         .addComponent(spinners[6]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton8)
-                        .addGap(300, 300, 300)  
+                        .addGap(30, 30, 30)   
                         .addComponent(spinners[7]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton9)
-                        .addGap(300, 300, 300)  
+                        .addGap(30, 30, 30)   
                         .addComponent(spinners[8]))
                     .addComponent(jLabel7)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton13)
-                        .addGap(300, 300, 300)  
+                        .addGap(30, 30, 30)   
                         .addComponent(spinners[9]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton14)
-                        .addGap(300, 300, 300)  
+                        .addGap(30, 30, 30)   
                         .addComponent(spinners[10]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton15)
-                        .addGap(300, 300, 300)  
+                        .addGap(30, 30, 30)   
                         .addComponent(spinners[11]))
                     .addComponent(jLabel8)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton16)
-                        .addGap(300, 300, 300)  
+                        .addGap(30, 30, 30)   
                         .addComponent(spinners[12]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton17)
-                        .addGap(300, 300, 300)  
+                        .addGap(30, 30, 30)   
                         .addComponent(spinners[13]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton18)
-                        .addGap(300, 300, 300)  
+                        .addGap(30, 30, 30)   
                         .addComponent(spinners[14])))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
