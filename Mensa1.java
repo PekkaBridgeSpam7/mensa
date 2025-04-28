@@ -1,17 +1,16 @@
 package mensa;
 
-import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.text.DecimalFormat;
 import java.util.Random;
 import java.util.function.BiConsumer;
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
 
 public class Mensa1 extends javax.swing.JFrame {
     // Variables declaration
     private javax.swing.JButton jButton1;
     private javax.swing.JButton resetButton;
-    private javax.swing.JButton backButton; // Added back button
+    private javax.swing.JButton backButton; 
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -52,15 +51,17 @@ public class Mensa1 extends javax.swing.JFrame {
 
     // Add these static variables at the class level
     private static int scontiRimasti = 10;
-    private static final double PERCENTUALE_SCONTO = 0.10; // 10%
-    private static final double PROBABILITA_SCONTO = 0.3; // 30% di probabilità di ottenere lo sconto
+    private static final double PERCENTUALE_SCONTO = 0.10; 
+    private static final double PROBABILITA_SCONTO = 0.3; 
     private static Random random = new Random();
+
+    private static final int SPINNER_X_POSITION = 450; 
+    private static final int SPINNER_WIDTH = 70;
+    private static final int SPINNER_HEIGHT = 25;
 
     public Mensa1() {
         try {
-            // Impostiamo un look and feel moderno
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-            // Personalizziamo i colori del tema
             UIManager.put("control", new Color(245, 245, 245));
             UIManager.put("nimbusBase", new Color(51, 98, 140));
             UIManager.put("nimbusBlueGrey", new Color(169, 176, 190));
@@ -309,7 +310,7 @@ public class Mensa1 extends javax.swing.JFrame {
             }
         }
 
-        // Check dessert with quantities
+        // Check dessert 
         if (jRadioButton13.isSelected()) {
             int qty = getQuantity(spinners[9]);
             if (qty > 0) {
@@ -335,7 +336,7 @@ public class Mensa1 extends javax.swing.JFrame {
             }
         }
 
-        // Check bevande with quantities
+        // Check bevande 
         if (jRadioButton16.isSelected()) {
             int qty = getQuantity(spinners[12]);
             if (qty > 0) {
@@ -381,12 +382,10 @@ public class Mensa1 extends javax.swing.JFrame {
 
         jTextArea1.setText(receipt.toString());
 
-        // Add total to fondo cassa
         CassaPrincipalee.updateFondoCassa(totale);
     }
 
     private void resetAll() {
-        // Clear all radio button selections
         primiGroup.clearSelection();
         secondiGroup.clearSelection();
         contorniGroup.clearSelection();
@@ -446,7 +445,31 @@ public class Mensa1 extends javax.swing.JFrame {
             }
         });
 
-        // Modifica i testi dei radio button per includere i prezzi
+        // Inizializza spinners 
+        spinners = new JSpinner[15];
+        for (int i = 0; i < 15; i++) {
+            spinners[i] = new JSpinner(new SpinnerNumberModel(0, 0, 10, 1));
+            
+            // Set size for all spinners
+            Dimension spinnerSize = new Dimension(70, 25);
+            spinners[i].setPreferredSize(spinnerSize);
+            spinners[i].setMinimumSize(spinnerSize);
+            spinners[i].setMaximumSize(spinnerSize);
+            
+            // Create a container panel for fixed positioning
+            JPanel spinnerContainer = new JPanel(new FlowLayout(FlowLayout.LEFT));
+            spinnerContainer.setOpaque(false);
+            spinnerContainer.add(Box.createHorizontalStrut(600)); 
+            spinnerContainer.add(spinners[i]);
+            jPanel1.add(spinnerContainer);
+            
+            // Style the spinner
+            spinners[i].setBorder(BorderFactory.createLineBorder(Color.GRAY));
+            ((JSpinner.DefaultEditor) spinners[i].getEditor()).getTextField().setHorizontalAlignment(JTextField.CENTER);
+        }
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
         jRadioButton1.setText("Pasta al sugo (€8.50)");
         jRadioButton2.setText("Pata e pesto (€9.00)");
         jRadioButton3.setText("Pasta e patate (€9.50)");
@@ -463,30 +486,6 @@ public class Mensa1 extends javax.swing.JFrame {
         jRadioButton17.setText("Birra (€3.50)");
         jRadioButton18.setText("Vino (€4.00)");
 
-        // Inizializzazione degli spinner con posizione fissa
-        spinners = new JSpinner[15];
-        for (int i = 0; i < 15; i++) {
-            spinners[i] = new JSpinner(new SpinnerNumberModel(0, 0, 10, 1));
-            spinners[i].setPreferredSize(new Dimension(60, 30));
-            spinners[i].setMaximumSize(new Dimension(60, 30));
-            spinners[i].setMinimumSize(new Dimension(60, 30));
-
-            // Crea un pannello per contenere lo spinner
-            JPanel spinnerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-            spinnerPanel.setBackground(new Color(255, 250, 240));
-            spinnerPanel.add(spinners[i]);
-
-            // Posiziona il pannello a una distanza fissa dal margine sinistro
-            spinnerPanel.setBounds(250, 0, 80, 30);
-            spinners[i] = new JSpinner(spinners[i].getModel());
-            spinners[i].setBorder(BorderFactory.createLineBorder(new Color(200, 200, 200)));
-        }
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 204));
-
-        // Setup components with larger font and new positioning
         jLabel2.setFont(new java.awt.Font("Rockwell", Font.BOLD | Font.ITALIC, 36));
         jLabel2.setText("Mensa da Salvatore");
 
@@ -508,9 +507,9 @@ public class Mensa1 extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Arial Black", Font.BOLD, 12));
         jLabel9.setText("Totale:");
 
-        jTextArea1.setColumns(20);  // Increased from 15
-        jTextArea1.setRows(8);      // Increased from 5
-        jScrollPane1.setPreferredSize(new Dimension(300, 400));  // Increased dimensions
+        jTextArea1.setColumns(20);  
+        jTextArea1.setRows(8);      
+        jScrollPane1.setPreferredSize(new Dimension(300, 400));  
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton1.setBackground(new java.awt.Color(255, 51, 51));
@@ -536,23 +535,6 @@ public class Mensa1 extends javax.swing.JFrame {
             }
         });
 
-        // Setup radio buttons
-        jRadioButton1.setText("Pasta al sugo (€8.50)");
-        jRadioButton2.setText("Pasta e pesto (€9.00)");
-        jRadioButton3.setText("Pasta e patate (€9.50)");
-        jRadioButton4.setText("Cotoletta (€12.00)");
-        jRadioButton5.setText("Salsiccia (€11.00)");
-        jRadioButton6.setText("Bastoncini di pesce (€13.00)");
-        jRadioButton7.setText("Patatine (€4.50)");
-        jRadioButton8.setText("Insalata (€4.00)");
-        jRadioButton9.setText("Broccoli (€4.50)");
-        jRadioButton13.setText("Banana (€1.50)");
-        jRadioButton14.setText("Tortino al cioccolato (€5.00)");
-        jRadioButton15.setText("Gelato alla fragola (€4.00)");
-        jRadioButton16.setText("Acqua (€1.00)");
-        jRadioButton17.setText("Birra (€3.50)");
-        jRadioButton18.setText("Vino (€4.00)");
-
         // Layout code
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -570,67 +552,67 @@ public class Mensa1 extends javax.swing.JFrame {
                     .addComponent(jLabel11)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton1)
-                        .addGap(250, 250, 250)  // Fissa la distanza a 250px
+                        .addGap(300, 300, 300)  
                         .addComponent(spinners[0]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton2)
-                        .addGap(250, 250, 250)  // Fissa la distanza a 250px
+                        .addGap(300, 300, 300)  
                         .addComponent(spinners[1]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton3)
-                        .addGap(250, 250, 250)  // Fissa la distanza a 250px
+                        .addGap(300, 300, 300) 
                         .addComponent(spinners[2]))
                     .addComponent(jLabel12)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton4)
-                        .addGap(250, 250, 250)  // Fissa la distanza a 250px
+                        .addGap(300, 300, 300)  
                         .addComponent(spinners[3]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton5)
-                        .addGap(250, 250, 250)  // Fissa la distanza a 250px
+                        .addGap(300, 300, 300)  
                         .addComponent(spinners[4]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton6)
-                        .addGap(250, 250, 250)  // Fissa la distanza a 250px
+                        .addGap(300, 300, 300)  
                         .addComponent(spinners[5]))
                     .addComponent(jLabel13)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton7)
-                        .addGap(250, 250, 250)  // Fissa la distanza a 250px
+                        .addGap(300, 300, 300)  
                         .addComponent(spinners[6]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton8)
-                        .addGap(250, 250, 250)  // Fissa la distanza a 250px
+                        .addGap(300, 300, 300)  
                         .addComponent(spinners[7]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton9)
-                        .addGap(250, 250, 250)  // Fissa la distanza a 250px
+                        .addGap(300, 300, 300)  
                         .addComponent(spinners[8]))
                     .addComponent(jLabel7)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton13)
-                        .addGap(250, 250, 250)  // Fissa la distanza a 250px
+                        .addGap(300, 300, 300)  
                         .addComponent(spinners[9]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton14)
-                        .addGap(250, 250, 250)  // Fissa la distanza a 250px
+                        .addGap(300, 300, 300)  
                         .addComponent(spinners[10]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton15)
-                        .addGap(250, 250, 250)  // Fissa la distanza a 250px
+                        .addGap(300, 300, 300)  
                         .addComponent(spinners[11]))
                     .addComponent(jLabel8)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton16)
-                        .addGap(250, 250, 250)  // Fissa la distanza a 250px
+                        .addGap(300, 300, 300)  
                         .addComponent(spinners[12]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton17)
-                        .addGap(250, 250, 250)  // Fissa la distanza a 250px
+                        .addGap(300, 300, 300)  
                         .addComponent(spinners[13]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jRadioButton18)
-                        .addGap(250, 250, 250)  // Fissa la distanza a 250px
+                        .addGap(300, 300, 300)  
                         .addComponent(spinners[14])))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -647,7 +629,7 @@ public class Mensa1 extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(backButton)) // Added back button to layout
+                    .addComponent(backButton)) 
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()

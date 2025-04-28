@@ -13,10 +13,8 @@ import java.awt.*;
  */
 public class CassaPrincipalee extends javax.swing.JFrame {
 
-    // Aggiungi questa variabile statica all'inizio della classe
     public static boolean cassaAperta = true;
 
-    // Add static field for fondo cassa
     public static double fondoCassa = 0.0;
 
     private static CassaPrincipalee instance;
@@ -29,7 +27,7 @@ public class CassaPrincipalee extends javax.swing.JFrame {
      */
     public CassaPrincipalee() {
         initComponents();
-        jTextField1.setText("0.00"); // Set initial display value
+        jTextField1.setText("0.00"); 
         instance = this;
     }
 
@@ -228,8 +226,8 @@ public class CassaPrincipalee extends javax.swing.JFrame {
                 .addGap(21, 21, 21))
         );
 
-        setLocationRelativeTo(null); // Center the window
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Close only this window, not entire app
+        setLocationRelativeTo(null); // Centra il frame
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Close only this window
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -301,7 +299,7 @@ public class CassaPrincipalee extends javax.swing.JFrame {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration 
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -314,5 +312,4 @@ public class CassaPrincipalee extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    // End of variables declaration//GEN-END:variables
 }
