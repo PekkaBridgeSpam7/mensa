@@ -15,7 +15,8 @@ public class CassaPrincipalee extends javax.swing.JFrame {
 
     public static boolean cassaAperta = true;
 
-    public static double fondoCassa = 0.0;
+    public static double fondoCassa = 300.0;  
+    public static double saldo = 0.0;
 
     private static CassaPrincipalee instance;
     private static Mensa1 mensa1Instance;
@@ -27,7 +28,8 @@ public class CassaPrincipalee extends javax.swing.JFrame {
      */
     public CassaPrincipalee() {
         initComponents();
-        jTextField1.setText("0.00"); 
+        jTextField1.setText("300.00");  
+        jTextSaldo.setText("0.00");
         instance = this;
     }
 
@@ -59,6 +61,8 @@ public class CassaPrincipalee extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
+        jLabelSaldo = new javax.swing.JLabel();
+        jTextSaldo = new javax.swing.JTextField();
 
         jTextField2.setText("jTextField2");
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
@@ -71,7 +75,7 @@ public class CassaPrincipalee extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 204));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); 
         jLabel1.setText("Cassa Principale");
 
         jButton1.setText("DEPOSITA");
@@ -80,7 +84,7 @@ public class CassaPrincipalee extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
                     double importo = Double.parseDouble(jTextField3.getText());
-                    updateFondoCassa(importo);
+                    updateFondoCassa(importo, false); // false = not a sale
                     jTextField3.setText("");
                     JOptionPane.showMessageDialog(null, "Deposito effettuato con successo");
                 } catch (NumberFormatException e) {
@@ -99,7 +103,7 @@ public class CassaPrincipalee extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Fondi insufficienti", "Errore", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
-                    updateFondoCassa(-importo);
+                    updateFondoCassa(-importo, false); // false = not a sale
                     jTextField3.setText("");
                     JOptionPane.showMessageDialog(null, "Prelievo effettuato con successo");
                 } catch (NumberFormatException e) {
@@ -108,10 +112,10 @@ public class CassaPrincipalee extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); 
         jLabel2.setText("FONDO CASSA:");
 
-        jTextField1.setText("0.00");
+        jTextField1.setText("300.00");
         jTextField1.setEditable(false);
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,7 +170,13 @@ public class CassaPrincipalee extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("IMPORTO ");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); 
+        jLabel3.setText("IMPORTO:");
+        jLabel3.setPreferredSize(new Dimension(100, jLabel3.getPreferredSize().height));
+
+        jLabelSaldo.setFont(new java.awt.Font("Segoe UI", 0, 18)); 
+        jLabelSaldo.setText("SALDO:");
+        jTextSaldo.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -183,24 +193,24 @@ public class CassaPrincipalee extends javax.swing.JFrame {
                         .addGap(42, 42, 42)
                         .addComponent(jButton3))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jButton2)
-                                        .addGap(40, 40, 40)
-                                        .addComponent(jButton1))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(27, 27, 27)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(128, 128, 128)  // Modified to position FONDO CASSA at 300px
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addComponent(jLabelSaldo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jButton2)
+                        .addGap(40, 40, 40)
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -214,15 +224,16 @@ public class CassaPrincipalee extends javax.swing.JFrame {
                 .addGap(72, 72, 72)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelSaldo)
+                    .addComponent(jTextSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
                 .addGap(21, 21, 21))
         );
 
@@ -251,14 +262,18 @@ public class CassaPrincipalee extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
-    // Add method to update fondo cassa display
-    public static void updateFondoCassa(double amount) {
+    // Update method to handle both fondo cassa and sales operations
+    public static void updateFondoCassa(double amount, boolean isSale) {
         fondoCassa += amount;
+        if (isSale) {
+            saldo += amount;
+        }
         java.awt.EventQueue.invokeLater(() -> {
-            // Update all instances of CassaPrincipalee
             for (Window window : Window.getWindows()) {
                 if (window instanceof CassaPrincipalee) {
-                    ((CassaPrincipalee) window).jTextField1.setText(String.format("%.2f", fondoCassa));
+                    CassaPrincipalee instance = (CassaPrincipalee) window;
+                    instance.jTextField1.setText(String.format("%.2f", fondoCassa));
+                    instance.jTextSaldo.setText(String.format("%.2f", saldo));
                 }
             }
         });
@@ -308,8 +323,10 @@ public class CassaPrincipalee extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelSaldo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextSaldo;
 }

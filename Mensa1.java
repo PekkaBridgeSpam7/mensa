@@ -155,7 +155,7 @@ public class Mensa1 extends javax.swing.JFrame {
         customizeCategoryLabel(jLabel8, "Bevande");
 
         // Personalizzazione area scontrino
-        jTextArea1.setFont(new Font("Consolas", Font.PLAIN, 14));
+        jTextArea1.setFont(new Font("Courier New", Font.BOLD, 16));
         jTextArea1.setBackground(new Color(255, 255, 250));
         jScrollPane1.setBorder(BorderFactory.createTitledBorder(
             BorderFactory.createLineBorder(new Color(139, 69, 19), 2),
@@ -219,17 +219,21 @@ public class Mensa1 extends javax.swing.JFrame {
 
         double totale = 0;
         StringBuilder receipt = new StringBuilder();
-        receipt.append("          Mensa da Salvatore          \n");
-        receipt.append("             Via Irno n7              \n");
+        // Center align header text
         receipt.append("=====================================\n");
-        receipt.append("PIATTO                         PREZZO\n");
+        receipt.append("         Mensa da Salvatore         \n");
+        receipt.append("            Via Irno n7             \n");
+        receipt.append("           Salerno, SA              \n");
+        receipt.append("         Tel: 089 2134675           \n");
+        receipt.append("=====================================\n\n");
+        receipt.append("Piatti                        Prezzo\n");
         receipt.append("-------------------------------------\n");
 
-        jTextArea1.setFont(new Font("Courier New", Font.PLAIN, 12));
+        jTextArea1.setFont(new Font("Courier New", Font.BOLD, 16));
 
         // Metodo helper per formattare le righe
         BiConsumer<String, Double> addItem = (item, price) -> {
-            receipt.append(String.format("%-30s€%7.2f\n", item, price));
+            receipt.append(String.format("%-25s €%6.2f\n", item, price));
         };
 
         // Check primi piatti
@@ -362,27 +366,89 @@ public class Mensa1 extends javax.swing.JFrame {
             }
         }
 
-        receipt.append("=====================================\n");
-        receipt.append(String.format("%-30s€%7.2f\n", "TOTALE:", totale));
+        // Before showing the receipt, ask for payment method
+        String[] options = {"Carta", "Contanti"};
+        int paymentMethod = JOptionPane.showOptionDialog(
+            this,
+            "Seleziona il metodo di pagamento:",
+            "Metodo di Pagamento",
+            JOptionPane.DEFAULT_OPTION,
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            options,
+            options[0]
+        );
 
-        // Applica sconto casuale se ci sono ancora sconti disponibili
+        if (paymentMethod == -1) {
+            return; // User cancelled
+        }
+
+        double cashReceived = 0;
+        double change = 0;
+
+        if (paymentMethod == 1) { // Contanti
+            String input = JOptionPane.showInputDialog(
+                this,
+                "Totale da pagare: €" + String.format("%.2f", totale) + "\nInserisci l'importo ricevuto:",
+                "Pagamento in Contanti",
+                JOptionPane.QUESTION_MESSAGE
+            );
+
+            if (input == null) {
+                return; // User cancelled
+            }
+
+            try {
+                cashReceived = Double.parseDouble(input);
+                if (cashReceived < totale) {
+                    JOptionPane.showMessageDialog(
+                        this,
+                        "Importo insufficiente!",
+                        "Errore",
+                        JOptionPane.ERROR_MESSAGE
+                    );
+                    return;
+                }
+                change = cashReceived - totale;
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Importo non valido!",
+                    "Errore",
+                    JOptionPane.ERROR_MESSAGE
+                );
+                return;
+            }
+        }
+
+        // Add the amount to both fondo cassa and saldo
+        CassaPrincipalee.updateFondoCassa(totale, true); // true = is a sale
+
+        // Add payment method and change info to receipt
+        receipt.append("\n-------------------------------------\n");
+        receipt.append(String.format("%-25s %s\n", "Metodo:", options[paymentMethod]));
+        
+        if (paymentMethod == 1) { // Se pagamento in contanti
+            receipt.append(String.format("%-25s €%6.2f\n", "Ricevuti:", cashReceived));
+            receipt.append(String.format("%-25s €%6.2f\n", "Resto:", change));
+        }
+
+        // Existing code for random discount
         if (scontiRimasti > 0 && random.nextDouble() < PROBABILITA_SCONTO) {
             double sconto = totale * PERCENTUALE_SCONTO;
             totale = totale - sconto;
             scontiRimasti--;
 
-            receipt.append("=====================================\n");
-            receipt.append(String.format("%-30s€%7.2f\n", "SCONTO 10%:", sconto));
-            receipt.append(String.format("%-30s€%7.2f", "TOTALE SCONTATO:", totale));
-            receipt.append("\n** Congratulazioni! Hai vinto uno sconto! **\n");
-            receipt.append(String.format("Sconti rimasti: %d", scontiRimasti));
+            receipt.append("-------------------------------------\n");
+            receipt.append(String.format("%-25s €%6.2f\n", "SCONTO 10%:", sconto));
+            receipt.append(String.format("%-25s €%6.2f\n", "TOTALE SCONTATO:", totale));
+            receipt.append("\n      ** Hai vinto uno sconto! **      \n");
+            receipt.append(String.format("        Sconti rimasti: %d        ", scontiRimasti));
         } else {
-            receipt.append(String.format("%-30s€%7.2f", "TOTALE:", totale));
+            receipt.append(String.format("%-25s €%6.2f\n", "TOTALE:", totale));
         }
 
         jTextArea1.setText(receipt.toString());
-
-        CassaPrincipalee.updateFondoCassa(totale);
     }
 
     private void resetAll() {
@@ -505,8 +571,7 @@ public class Mensa1 extends javax.swing.JFrame {
         }
 
         jLabel2.setFont(new java.awt.Font("Rockwell", Font.BOLD | Font.ITALIC, 36));
-jLabel2.setText("Mensa da Salvatore");
-jLabel2.setText("Mensa da Salvatore");
+        jLabel2.setText("Mensa da Salvatore");
 
         jLabel11.setFont(new java.awt.Font("Arial Black", Font.BOLD, 18));
         jLabel11.setText("Primi Piatti");
@@ -526,9 +591,11 @@ jLabel2.setText("Mensa da Salvatore");
         jLabel9.setFont(new java.awt.Font("Arial Black", Font.BOLD, 12));
         jLabel9.setText("Totale:");
 
-        jTextArea1.setColumns(20);  
-        jTextArea1.setRows(8);      
-        jScrollPane1.setPreferredSize(new Dimension(300, 400));  
+        // Modify text area and scroll pane settings
+        jTextArea1.setColumns(25);  // Adjusted for new format
+        jTextArea1.setRows(25);
+        jTextArea1.setFont(new Font("Courier New", Font.BOLD, 16)); // Increase font size
+        jScrollPane1.setPreferredSize(new Dimension(400, 500));  // Adjusted to fit screen better
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton1.setBackground(new java.awt.Color(255, 51, 51));
@@ -635,7 +702,7 @@ jLabel2.setText("Mensa da Salvatore");
                         .addComponent(spinners[14])))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(resetButton)
                         .addGap(10, 10, 10)
@@ -713,7 +780,7 @@ jLabel2.setText("Mensa da Salvatore");
                             .addComponent(spinners[14])))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 50, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(resetButton)
