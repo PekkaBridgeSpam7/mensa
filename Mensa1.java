@@ -23,29 +23,26 @@ public class Mensa1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton13;
-    private javax.swing.JRadioButton jRadioButton14;
-    private javax.swing.JRadioButton jRadioButton15;
-    private javax.swing.JRadioButton jRadioButton16;
-    private javax.swing.JRadioButton jRadioButton17;
-    private javax.swing.JRadioButton jRadioButton18;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JRadioButton jRadioButton7;
-    private javax.swing.JRadioButton jRadioButton8;
-    private javax.swing.JRadioButton jRadioButton9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
 
-    private ButtonGroup primiGroup = new ButtonGroup();
-    private ButtonGroup secondiGroup = new ButtonGroup();
-    private ButtonGroup contorniGroup = new ButtonGroup();
-    private ButtonGroup dessertGroup = new ButtonGroup();
-    private ButtonGroup bevandeGroup = new ButtonGroup();
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBox4;
+    private javax.swing.JCheckBox jCheckBox5;
+    private javax.swing.JCheckBox jCheckBox6;
+    private javax.swing.JCheckBox jCheckBox7;
+    private javax.swing.JCheckBox jCheckBox8;
+    private javax.swing.JCheckBox jCheckBox9;
+    private javax.swing.JCheckBox jCheckBox13;
+    private javax.swing.JCheckBox jCheckBox14;
+    private javax.swing.JCheckBox jCheckBox15;
+    private javax.swing.JCheckBox jCheckBox16;
+    private javax.swing.JCheckBox jCheckBox17;
+    private javax.swing.JCheckBox jCheckBox18;
+
+    private javax.swing.JLabel totaleParziale;
 
     private JSpinner[] spinners;
 
@@ -78,51 +75,81 @@ public class Mensa1 extends javax.swing.JFrame {
     }
 
     private void setupButtonGroups() {
-        // Configurazione gruppi pulsanti per le categorie del menu
-        primiGroup.add(jRadioButton1);
-        jRadioButton1.addActionListener(e -> spinners[0].setValue(1));
+        // Configurazione listener per le checkbox
+        jCheckBox1.addActionListener(e -> {
+            spinners[0].setValue(jCheckBox1.isSelected() ? 1 : 0);
+            updateTotaleParziale();
+        });
 
-        primiGroup.add(jRadioButton2);
-        jRadioButton2.addActionListener(e -> spinners[1].setValue(1));
+        jCheckBox2.addActionListener(e -> {
+            spinners[1].setValue(jCheckBox2.isSelected() ? 1 : 0);
+            updateTotaleParziale();
+        });
 
-        primiGroup.add(jRadioButton3);
-        jRadioButton3.addActionListener(e -> spinners[2].setValue(1));
+        jCheckBox3.addActionListener(e -> {
+            spinners[2].setValue(jCheckBox3.isSelected() ? 1 : 0);
+            updateTotaleParziale();
+        });
 
-        secondiGroup.add(jRadioButton4);
-        jRadioButton4.addActionListener(e -> spinners[3].setValue(1));
+        jCheckBox4.addActionListener(e -> {
+            spinners[3].setValue(jCheckBox4.isSelected() ? 1 : 0);
+            updateTotaleParziale();
+        });
 
-        secondiGroup.add(jRadioButton5);
-        jRadioButton5.addActionListener(e -> spinners[4].setValue(1));
+        jCheckBox5.addActionListener(e -> {
+            spinners[4].setValue(jCheckBox5.isSelected() ? 1 : 0);
+            updateTotaleParziale();
+        });
 
-        secondiGroup.add(jRadioButton6);
-        jRadioButton6.addActionListener(e -> spinners[5].setValue(1));
+        jCheckBox6.addActionListener(e -> {
+            spinners[5].setValue(jCheckBox6.isSelected() ? 1 : 0);
+            updateTotaleParziale();
+        });
 
-        contorniGroup.add(jRadioButton7);
-        jRadioButton7.addActionListener(e -> spinners[6].setValue(1));
+        jCheckBox7.addActionListener(e -> {
+            spinners[6].setValue(jCheckBox7.isSelected() ? 1 : 0);
+            updateTotaleParziale();
+        });
 
-        contorniGroup.add(jRadioButton8);
-        jRadioButton8.addActionListener(e -> spinners[7].setValue(1));
+        jCheckBox8.addActionListener(e -> {
+            spinners[7].setValue(jCheckBox8.isSelected() ? 1 : 0);
+            updateTotaleParziale();
+        });
 
-        contorniGroup.add(jRadioButton9);
-        jRadioButton9.addActionListener(e -> spinners[8].setValue(1));
+        jCheckBox9.addActionListener(e -> {
+            spinners[8].setValue(jCheckBox9.isSelected() ? 1 : 0);
+            updateTotaleParziale();
+        });
 
-        dessertGroup.add(jRadioButton13);
-        jRadioButton13.addActionListener(e -> spinners[9].setValue(1));
+        jCheckBox13.addActionListener(e -> {
+            spinners[9].setValue(jCheckBox13.isSelected() ? 1 : 0);
+            updateTotaleParziale();
+        });
 
-        dessertGroup.add(jRadioButton14);
-        jRadioButton14.addActionListener(e -> spinners[10].setValue(1));
+        jCheckBox14.addActionListener(e -> {
+            spinners[10].setValue(jCheckBox14.isSelected() ? 1 : 0);
+            updateTotaleParziale();
+        });
 
-        dessertGroup.add(jRadioButton15);
-        jRadioButton15.addActionListener(e -> spinners[11].setValue(1));
+        jCheckBox15.addActionListener(e -> {
+            spinners[11].setValue(jCheckBox15.isSelected() ? 1 : 0);
+            updateTotaleParziale();
+        });
 
-        bevandeGroup.add(jRadioButton16);
-        jRadioButton16.addActionListener(e -> spinners[12].setValue(1));
+        jCheckBox16.addActionListener(e -> {
+            spinners[12].setValue(jCheckBox16.isSelected() ? 1 : 0);
+            updateTotaleParziale();
+        });
 
-        bevandeGroup.add(jRadioButton17);
-        jRadioButton17.addActionListener(e -> spinners[13].setValue(1));
+        jCheckBox17.addActionListener(e -> {
+            spinners[13].setValue(jCheckBox17.isSelected() ? 1 : 0);
+            updateTotaleParziale();
+        });
 
-        bevandeGroup.add(jRadioButton18);
-        jRadioButton18.addActionListener(e -> spinners[14].setValue(1));
+        jCheckBox18.addActionListener(e -> {
+            spinners[14].setValue(jCheckBox18.isSelected() ? 1 : 0);
+            updateTotaleParziale();
+        });
     }
 
     private void setupFrame() {
@@ -162,15 +189,19 @@ public class Mensa1 extends javax.swing.JFrame {
         ));
         jScrollPane1.setPreferredSize(new Dimension(450, 500));
 
-        Component[] components = jPanel1.getComponents();
-        for (Component comp : components) {
-            if (comp instanceof JRadioButton) {
-                JRadioButton radio = (JRadioButton) comp;
-                radio.setFont(new Font("Segoe UI", Font.PLAIN, 16));
-                radio.setBackground(new Color(255, 250, 240));
-                radio.setCursor(new Cursor(Cursor.HAND_CURSOR));
-                radio.setPreferredSize(new Dimension(250, radio.getPreferredSize().height));
-            }
+        JCheckBox[] allCheckBoxes = {
+            jCheckBox1, jCheckBox2, jCheckBox3,
+            jCheckBox4, jCheckBox5, jCheckBox6,
+            jCheckBox7, jCheckBox8, jCheckBox9,
+            jCheckBox13, jCheckBox14, jCheckBox15,
+            jCheckBox16, jCheckBox17, jCheckBox18
+        };
+
+        for (JCheckBox cb : allCheckBoxes) {
+            cb.setFont(new Font("Segoe UI", Font.PLAIN, 16));
+            cb.setBackground(new Color(255, 250, 240));
+            cb.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            cb.setPreferredSize(new Dimension(250, cb.getPreferredSize().height));
         }
 
         for (JSpinner spinner : spinners) {
@@ -179,6 +210,37 @@ public class Mensa1 extends javax.swing.JFrame {
             ((JSpinner.DefaultEditor) spinner.getEditor()).getTextField().setFont(new Font("Segoe UI", Font.BOLD, 14));
             spinner.setBorder(BorderFactory.createLineBorder(new Color(139, 69, 19), 1));
         }
+    }
+
+    private void updateTotaleParziale() {
+        double totale = 0;
+
+        // Primi piatti
+        if (jCheckBox1.isSelected()) totale += 5.50 * (Integer)spinners[0].getValue();
+        if (jCheckBox2.isSelected()) totale += 5.50 * (Integer)spinners[1].getValue();
+        if (jCheckBox3.isSelected()) totale += 5.50 * (Integer)spinners[2].getValue();
+
+        // Secondi piatti
+        if (jCheckBox4.isSelected()) totale += 7.00 * (Integer)spinners[3].getValue();
+        if (jCheckBox5.isSelected()) totale += 7.00 * (Integer)spinners[4].getValue();
+        if (jCheckBox6.isSelected()) totale += 7.00 * (Integer)spinners[5].getValue();
+
+        // Contorni
+        if (jCheckBox7.isSelected()) totale += 2.50 * (Integer)spinners[6].getValue();
+        if (jCheckBox8.isSelected()) totale += 2.50 * (Integer)spinners[7].getValue();
+        if (jCheckBox9.isSelected()) totale += 2.50 * (Integer)spinners[8].getValue();
+
+        // Dessert
+        if (jCheckBox13.isSelected()) totale += 1.50 * (Integer)spinners[9].getValue();
+        if (jCheckBox14.isSelected()) totale += 5.00 * (Integer)spinners[10].getValue();
+        if (jCheckBox15.isSelected()) totale += 2.50 * (Integer)spinners[11].getValue();
+
+        // Bevande
+        if (jCheckBox16.isSelected()) totale += 1.00 * (Integer)spinners[12].getValue();
+        if (jCheckBox17.isSelected()) totale += 3.00 * (Integer)spinners[13].getValue();
+        if (jCheckBox18.isSelected()) totale += 4.00 * (Integer)spinners[14].getValue();
+
+        totaleParziale.setText(String.format("Totale: €%.2f", totale));
     }
 
     private void customizeButton(JButton button, Color bgColor, Color fgColor, String text) {
@@ -239,7 +301,7 @@ public class Mensa1 extends javax.swing.JFrame {
 
         // Calcolo totale per categoria
         // Primi piatti
-        if (jRadioButton1.isSelected()) {
+        if (jCheckBox1.isSelected()) {
             int qty = getQuantity(spinners[0]);
             if (qty > 0) {
                 double price = 5.50 * qty;
@@ -247,7 +309,7 @@ public class Mensa1 extends javax.swing.JFrame {
                 addItem.accept(String.format("Pasta al sugo (x%d)", qty), price);
             }
         }
-        if (jRadioButton2.isSelected()) {
+        if (jCheckBox2.isSelected()) {
             int qty = getQuantity(spinners[1]);
             if (qty > 0) {
                 double price = 5.50 * qty;
@@ -255,7 +317,7 @@ public class Mensa1 extends javax.swing.JFrame {
                 addItem.accept(String.format("Pasta e pesto (x%d)", qty), price);
             }
         }
-        if (jRadioButton3.isSelected()) {
+        if (jCheckBox3.isSelected()) {
             int qty = getQuantity(spinners[2]);
             if (qty > 0) {
                 double price = 5.50 * qty;
@@ -265,7 +327,7 @@ public class Mensa1 extends javax.swing.JFrame {
         }
 
         // Secondi piatti
-        if (jRadioButton4.isSelected()) {
+        if (jCheckBox4.isSelected()) {
             int qty = getQuantity(spinners[3]);
             if (qty > 0) {
                 double price = 7.00 * qty;
@@ -273,7 +335,7 @@ public class Mensa1 extends javax.swing.JFrame {
                 addItem.accept(String.format("Cotoletta (x%d)", qty), price);
             }
         }
-        if (jRadioButton5.isSelected()) {
+        if (jCheckBox5.isSelected()) {
             int qty = getQuantity(spinners[4]);
             if (qty > 0) {
                 double price = 7.00 * qty;
@@ -281,7 +343,7 @@ public class Mensa1 extends javax.swing.JFrame {
                 addItem.accept(String.format("Salsiccia (x%d)", qty), price);
             }
         }
-        if (jRadioButton6.isSelected()) {
+        if (jCheckBox6.isSelected()) {
             int qty = getQuantity(spinners[5]);
             if (qty > 0) {
                 double price = 7.00 * qty;
@@ -291,7 +353,7 @@ public class Mensa1 extends javax.swing.JFrame {
         }
 
         // Contorni
-        if (jRadioButton7.isSelected()) {
+        if (jCheckBox7.isSelected()) {
             int qty = getQuantity(spinners[6]);
             if (qty > 0) {
                 double price = 2.50 * qty;
@@ -299,7 +361,7 @@ public class Mensa1 extends javax.swing.JFrame {
                 addItem.accept(String.format("Patatine (x%d)", qty), price);
             }
         }
-        if (jRadioButton8.isSelected()) {
+        if (jCheckBox8.isSelected()) {
             int qty = getQuantity(spinners[7]);
             if (qty > 0) {
                 double price = 2.50 * qty;
@@ -307,7 +369,7 @@ public class Mensa1 extends javax.swing.JFrame {
                 addItem.accept(String.format("Insalata (x%d)", qty), price);
             }
         }
-        if (jRadioButton9.isSelected()) {
+        if (jCheckBox9.isSelected()) {
             int qty = getQuantity(spinners[8]);
             if (qty > 0) {
                 double price = 2.50 * qty;
@@ -317,7 +379,7 @@ public class Mensa1 extends javax.swing.JFrame {
         }
 
         // Dessert
-        if (jRadioButton13.isSelected()) {
+        if (jCheckBox13.isSelected()) {
             int qty = getQuantity(spinners[9]);
             if (qty > 0) {
                 double price = 1.50 * qty;
@@ -325,7 +387,7 @@ public class Mensa1 extends javax.swing.JFrame {
                 addItem.accept(String.format("Banana (x%d)", qty), price);
             }
         }
-        if (jRadioButton14.isSelected()) {
+        if (jCheckBox14.isSelected()) {
             int qty = getQuantity(spinners[10]);
             if (qty > 0) {
                 double price = 5.00 * qty;
@@ -333,7 +395,7 @@ public class Mensa1 extends javax.swing.JFrame {
                 addItem.accept(String.format("Tortino al cioccolato (x%d)", qty), price);
             }
         }
-        if (jRadioButton15.isSelected()) {
+        if (jCheckBox15.isSelected()) {
             int qty = getQuantity(spinners[11]);
             if (qty > 0) {
                 double price = 2.50 * qty;
@@ -343,7 +405,7 @@ public class Mensa1 extends javax.swing.JFrame {
         }
 
         // Bevande
-        if (jRadioButton16.isSelected()) {
+        if (jCheckBox16.isSelected()) {
             int qty = getQuantity(spinners[12]);
             if (qty > 0) {
                 double price = 1.00 * qty;
@@ -351,7 +413,7 @@ public class Mensa1 extends javax.swing.JFrame {
                 addItem.accept(String.format("Acqua (x%d)", qty), price);
             }
         }
-        if (jRadioButton17.isSelected()) {
+        if (jCheckBox17.isSelected()) {
             int qty = getQuantity(spinners[13]);
             if (qty > 0) {
                 double price = 3.00 * qty;
@@ -359,7 +421,7 @@ public class Mensa1 extends javax.swing.JFrame {
                 addItem.accept(String.format("Birra (x%d)", qty), price);
             }
         }
-        if (jRadioButton18.isSelected()) {
+        if (jCheckBox18.isSelected()) {
             int qty = getQuantity(spinners[14]);
             if (qty > 0) {
                 double price = 4.00 * qty;
@@ -456,17 +518,28 @@ public class Mensa1 extends javax.swing.JFrame {
     }
 
     private void resetAll() {
-        primiGroup.clearSelection();
-        secondiGroup.clearSelection();
-        contorniGroup.clearSelection();
-        dessertGroup.clearSelection();
-        bevandeGroup.clearSelection();
+        jCheckBox1.setSelected(false);
+        jCheckBox2.setSelected(false);
+        jCheckBox3.setSelected(false);
+        jCheckBox4.setSelected(false);
+        jCheckBox5.setSelected(false);
+        jCheckBox6.setSelected(false);
+        jCheckBox7.setSelected(false);
+        jCheckBox8.setSelected(false);
+        jCheckBox9.setSelected(false);
+        jCheckBox13.setSelected(false);
+        jCheckBox14.setSelected(false);
+        jCheckBox15.setSelected(false);
+        jCheckBox16.setSelected(false);
+        jCheckBox17.setSelected(false);
+        jCheckBox18.setSelected(false);
 
         for (JSpinner spinner : spinners) {
             spinner.setValue(0);
         }
 
         jTextArea1.setText("");
+        totaleParziale.setText("Totale: €0.00");
     }
 
     private void initComponents() {
@@ -483,24 +556,29 @@ public class Mensa1 extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         resetButton = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
-        jRadioButton7 = new javax.swing.JRadioButton();
-        jRadioButton8 = new javax.swing.JRadioButton();
-        jRadioButton9 = new javax.swing.JRadioButton();
-        jRadioButton13 = new javax.swing.JRadioButton();
-        jRadioButton14 = new javax.swing.JRadioButton();
-        jRadioButton15 = new javax.swing.JRadioButton();
-        jRadioButton16 = new javax.swing.JRadioButton();
-        jRadioButton17 = new javax.swing.JRadioButton();
-        jRadioButton18 = new javax.swing.JRadioButton();
+        jCheckBox1 = new JCheckBox("Pasta al sugo (€5.50)");
+        jCheckBox2 = new JCheckBox("Pasta e pesto (€5.50)");
+        jCheckBox3 = new JCheckBox("Pasta e patate (€5.50)");
+        jCheckBox4 = new JCheckBox("Cotoletta (€7.00)");
+        jCheckBox5 = new JCheckBox("Salsiccia (€7.00)");
+        jCheckBox6 = new JCheckBox("Bastoncini di pesce (€7.00)");
+        jCheckBox7 = new JCheckBox("Patatine (€2.50)");
+        jCheckBox8 = new JCheckBox("Insalata (€2.50)");
+        jCheckBox9 = new JCheckBox("Broccoli (€2.50)");
+        jCheckBox13 = new JCheckBox("Banana (€1.50)");
+        jCheckBox14 = new JCheckBox("Tortino al cioccolato (€5.00)");
+        jCheckBox15 = new JCheckBox("Gelato alla fragola (€2.50)");
+        jCheckBox16 = new JCheckBox("Acqua (€1.00)");
+        jCheckBox17 = new JCheckBox("Birra (€3.00)");
+        jCheckBox18 = new JCheckBox("Vino (€4.00)");
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+
+        totaleParziale = new JLabel("Totale: €0.00");
+        totaleParziale.setFont(new Font("Segoe UI", Font.BOLD, 24));
+        totaleParziale.setForeground(new Color(139, 69, 19));
+        totaleParziale.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
 
         backButton = new javax.swing.JButton();
         backButton.setText("Torna Indietro");
@@ -515,6 +593,7 @@ public class Mensa1 extends javax.swing.JFrame {
         spinners = new JSpinner[15];
         for (int i = 0; i < 15; i++) {
             spinners[i] = new JSpinner(new SpinnerNumberModel(0, 0, 10, 1));
+            spinners[i].addChangeListener(e -> updateTotaleParziale());
             
             Dimension spinnerSize = new Dimension(70, 30);
             spinners[i].setPreferredSize(spinnerSize);
@@ -533,37 +612,21 @@ public class Mensa1 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jRadioButton1.setText("Pasta al sugo (€5.50)");
-        jRadioButton2.setText("Pata e pesto (€5.50)");
-        jRadioButton3.setText("Pasta e patate (€5.50)");
-        jRadioButton4.setText("Cotoletta (€7.00)");
-        jRadioButton5.setText("Salsiccia (€7.00)");
-        jRadioButton6.setText("Bastoncini di pesce (€7.00)");
-        jRadioButton7.setText("Patatine (€2.50)");
-        jRadioButton8.setText("Insalata (€2.50)");
-        jRadioButton9.setText("Broccoli (€2.50)");
-        jRadioButton13.setText("Banana (€1.50)");
-        jRadioButton14.setText("Tortino al cioccolato (€5.00)");
-        jRadioButton15.setText("Gelato alla fragola (€2.50)");
-        jRadioButton16.setText("Acqua (€1.00)");
-        jRadioButton17.setText("Birra (€3.00)");
-        jRadioButton18.setText("Vino (€4.00)");
-
-        JRadioButton[] allRadioButtons = {
-            jRadioButton1, jRadioButton2, jRadioButton3,
-            jRadioButton4, jRadioButton5, jRadioButton6,
-            jRadioButton7, jRadioButton8, jRadioButton9,
-            jRadioButton13, jRadioButton14, jRadioButton15,
-            jRadioButton16, jRadioButton17, jRadioButton18
+        JComponent[] allComponents = {
+            jCheckBox1, jCheckBox2, jCheckBox3,
+            jCheckBox4, jCheckBox5, jCheckBox6,
+            jCheckBox7, jCheckBox8, jCheckBox9,
+            jCheckBox13, jCheckBox14, jCheckBox15,
+            jCheckBox16, jCheckBox17, jCheckBox18
         };
         
-        Font radioButtonFont = new Font("Arial", Font.PLAIN, 16);
+        Font componentFont = new Font("Arial", Font.PLAIN, 16);
         int maxWidth = 250;
         
-        for (JRadioButton rb : allRadioButtons) {
-            rb.setFont(radioButtonFont);
-            rb.setPreferredSize(new Dimension(maxWidth, rb.getPreferredSize().height));
-            rb.setMinimumSize(new Dimension(maxWidth, rb.getPreferredSize().height));
+        for (JComponent comp : allComponents) {
+            comp.setFont(componentFont);
+            comp.setPreferredSize(new Dimension(maxWidth, comp.getPreferredSize().height));
+            comp.setMinimumSize(new Dimension(maxWidth, comp.getPreferredSize().height));
         }
 
         jLabel2.setFont(new java.awt.Font("Rockwell", Font.BOLD | Font.ITALIC, 36));
@@ -631,69 +694,70 @@ public class Mensa1 extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
+                        .addComponent(jCheckBox1)
                         .addGap(20, 20, 20)   
                         .addComponent(spinners[0]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton2)
+                        .addComponent(jCheckBox2)
                         .addGap(20, 20, 20)   
                         .addComponent(spinners[1]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton3)
+                        .addComponent(jCheckBox3)
                         .addGap(20, 20, 20)  
                         .addComponent(spinners[2]))
                     .addComponent(jLabel12)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton4)
+                        .addComponent(jCheckBox4)
                         .addGap(20, 20, 20)   
                         .addComponent(spinners[3]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton5)
+                        .addComponent(jCheckBox5)
                         .addGap(20, 20, 20)   
                         .addComponent(spinners[4]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton6)
+                        .addComponent(jCheckBox6)
                         .addGap(20, 20, 20)   
                         .addComponent(spinners[5]))
                     .addComponent(jLabel13)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton7)
+                        .addComponent(jCheckBox7)
                         .addGap(20, 20, 20)   
                         .addComponent(spinners[6]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton8)
+                        .addComponent(jCheckBox8)
                         .addGap(20, 20, 20)   
                         .addComponent(spinners[7]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton9)
+                        .addComponent(jCheckBox9)
                         .addGap(20, 20, 20)   
                         .addComponent(spinners[8]))
                     .addComponent(jLabel7)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton13)
+                        .addComponent(jCheckBox13)
                         .addGap(20, 20, 20)   
                         .addComponent(spinners[9]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton14)
+                        .addComponent(jCheckBox14)
                         .addGap(20, 20, 20)   
                         .addComponent(spinners[10]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton15)
+                        .addComponent(jCheckBox15)
                         .addGap(20, 20, 20)   
                         .addComponent(spinners[11]))
                     .addComponent(jLabel8)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton16)
+                        .addComponent(jCheckBox16)
                         .addGap(20, 20, 20)   
                         .addComponent(spinners[12]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton17)
+                        .addComponent(jCheckBox17)
                         .addGap(20, 20, 20)   
                         .addComponent(spinners[13]))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jRadioButton18)
+                        .addComponent(jCheckBox18)
                         .addGap(20, 20, 20)   
-                        .addComponent(spinners[14])))
+                        .addComponent(spinners[14]))
+                    .addComponent(totaleParziale))
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -716,62 +780,64 @@ public class Mensa1 extends javax.swing.JFrame {
                         .addComponent(jLabel11)
                         .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton1)
+                            .addComponent(jCheckBox1)
                             .addComponent(spinners[0]))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton2)
+                            .addComponent(jCheckBox2)
                             .addComponent(spinners[1]))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton3)
+                            .addComponent(jCheckBox3)
                             .addComponent(spinners[2]))
                         .addGap(20, 20, 20)
                         .addComponent(jLabel12)
                         .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton4)
+                            .addComponent(jCheckBox4)
                             .addComponent(spinners[3]))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton5)
+                            .addComponent(jCheckBox5)
                             .addComponent(spinners[4]))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton6)
+                            .addComponent(jCheckBox6)
                             .addComponent(spinners[5]))
                         .addGap(20, 20, 20)
                         .addComponent(jLabel13)
                         .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton7)
+                            .addComponent(jCheckBox7)
                             .addComponent(spinners[6]))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton8)
+                            .addComponent(jCheckBox8)
                             .addComponent(spinners[7]))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton9)
+                            .addComponent(jCheckBox9)
                             .addComponent(spinners[8]))
                         .addGap(20, 20, 20)
                         .addComponent(jLabel7)
                         .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton13)
+                            .addComponent(jCheckBox13)
                             .addComponent(spinners[9]))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton14)
+                            .addComponent(jCheckBox14)
                             .addComponent(spinners[10]))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton15)
+                            .addComponent(jCheckBox15)
                             .addComponent(spinners[11]))
                         .addGap(20, 20, 20)
                         .addComponent(jLabel8)
                         .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton16)
+                            .addComponent(jCheckBox16)
                             .addComponent(spinners[12]))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton17)
+                            .addComponent(jCheckBox17)
                             .addComponent(spinners[13]))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton18)
-                            .addComponent(spinners[14])))
+                            .addComponent(jCheckBox18)
+                            .addComponent(spinners[14]))
+                        .addGap(20, 20, 20)
+                        .addComponent(totaleParziale))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 50, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
